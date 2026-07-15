@@ -1,0 +1,108 @@
+# Security Policy Analysis: When "Good Enough" Isn't Good Enough
+
+Let's look at a real (if painfully common) example of a bad security policy:
+
+> **SECURITY POLICY**
+> All employees should use good passwords. Don't share them.
+> IT will handle security stuff.
+> Report problems to someone.
+> Updated: Sometime last year
+
+At first glance, it *looks* like a policy. It has rules. It mentions passwords and IT. But when you hold it up against what a real security policy needs to do, it falls apart almost immediately.
+
+## Part A: What's Missing
+
+| Missing Component | Why It's Important |
+|---|---|
+| **Header info** (Version, Date, Owner, Approved By) | Without this, no one knows which version is current, who's accountable for it, or when it was actually approved. Impossible to audit. |
+| **Purpose Statement** | Readers don't know *why* the policy exists or what risk it's meant to reduce. |
+| **Scope Definition** | Doesn't say who or what it applies to — all employees? contractors? specific systems? This ambiguity invites non-compliance. |
+| **Specific Policy Statements** | "Use good passwords" isn't measurable or enforceable — there's no defined length, complexity, or expiration rule. |
+| **Roles and Responsibilities** | "IT will handle security stuff" doesn't define who does what, which creates confusion the moment something actually goes wrong. |
+| **Enforcement Section** | No stated consequences means the policy has no teeth in practice. |
+| **Definitions** | Terms like "good password" or "problem" are never defined, so everyone interprets them differently. |
+| **Related Documents** | No links to other policies (Incident Response, Data Classification, etc.), so the document exists in isolation. |
+| **Review/Revision History** | "Sometime last year" is not a review process — it's an admission that no one is tracking this. |
+
+## Part B: The Weaknesses in the Language Itself
+
+| Weakness | Problem | Impact |
+|---|---|---|
+| "All employees **should** use good passwords" | "Should" is a suggestion, not a requirement; "good" is entirely subjective | Nothing here can actually be enforced or audited |
+| "Don't share them" | Doesn't define what counts as sharing (writing it on a sticky note? telling a coworker temporarily?) or what happens if you do | Employees can violate this without even realizing it |
+| "IT will handle security stuff" | Vague to the point of meaningless — no defined responsibilities or process | In an actual incident, nobody knows who's supposed to act |
+| "Report problems to someone" | No named contact, no channel, no response time | Slows down detection and response, which increases damage |
+| "Updated: Sometime last year" | No real date, no formal review cycle | No way to know if this policy is stale or still aligned with current standards |
+
+## Part C: What It Should Actually Look Like
+
+Here's the same policy, rewritten as a real Password Policy:
+
+---
+
+### PASSWORD POLICY
+
+#### Document Control
+- Policy Owner: Chief Information Security Officer (CISO)
+- Version: 1.0
+- Effective Date: 2026-07-14
+- Last Reviewed: 2026-07-14
+- Next Review Date: 2027-07-14
+- Approved By: [Name/Title]
+
+#### 1. Purpose
+This policy establishes requirements for creating, managing, and protecting passwords used to access organizational systems, in order to reduce the risk of unauthorized access to company assets.
+
+#### 2. Scope
+Applies to all employees, contractors, third parties, and anyone accessing company systems, applications, or data via a password-based credential.
+
+#### 3. Policy Statements
+
+##### 3.1 Password Requirements
+- Minimum length: 12 characters (aligned with NIST SP 800-63B)
+- Must not be a commonly used or previously breached password (checked against a deny-list)
+- No mandatory periodic rotation unless there's evidence of compromise
+- Cannot reuse any of the last 10 passwords
+
+##### 3.2 Multi-Factor Authentication (MFA)
+- Required for all remote access, administrative accounts, and access to confidential or restricted data
+
+##### 3.3 Account Lockout
+- Accounts lock after 5 consecutive failed login attempts, for 15 minutes
+
+##### 3.4 Password Storage
+- Never stored or transmitted in plaintext
+- Stored using a salted, industry-standard hashing algorithm (bcrypt, Argon2)
+- Use of an approved password manager is encouraged
+
+##### 3.5 Prohibited Practices
+- Sharing passwords with anyone, including IT staff
+- Writing passwords on physical notes or unencrypted files
+- Reusing corporate passwords on personal accounts
+
+#### 4. Roles and Responsibilities
+- **Employees:** Comply with requirements; report suspected compromise immediately to security@company.com
+- **IT Security Team:** Maintain authentication systems, enforce technical controls, monitor for violations
+- **CISO:** Owns and approves the policy, reviews it annually
+
+#### 5. Enforcement
+Violations may result in disciplinary action, up to and including termination, in accordance with HR policy.
+
+#### 6. Definitions
+- **MFA:** Multi-Factor Authentication — requires two or more verification factors
+- **Hashing:** A one-way cryptographic transformation used to securely store passwords
+
+#### 7. Related Documents
+- Acceptable Use Policy
+- Access Control Policy
+- Incident Response Policy
+
+#### 8. Revision History
+
+| Version | Date | Author | Description |
+|---|---|---|---|
+| 1.0 | 2026-07-14 | CISO | Initial publication |
+
+---
+
+**The takeaway:** a security policy isn't a security policy until it can answer *who, what, when, and how* — with enough specificity that someone could actually be held accountable to it.

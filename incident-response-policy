@@ -1,0 +1,114 @@
+# What Actually Happens in the First 15 Minutes of a Security Incident
+
+Most companies have some version of an incident response plan sitting in a drawer somewhere. Very few have actually rehearsed what happens in the first 15 minutes after ransomware hits a production system, or a plant's control systems start behaving strangely.
+
+Here's what a real incident response framework looks like when you're dealing with both IT and industrial/OT systems spread across multiple countries — using the NIST lifecycle as the backbone:
+
+**Preparation → Detection & Analysis → Containment/Eradication/Recovery → Post-Incident**
+
+The scenario: a 2,000-employee manufacturing company operating across 5 countries, running IoT/OT systems on the factory floor, and subject to ISO 27001, GDPR, and industry-specific regulation.
+
+## 1. Not All Incidents Are Equal
+
+The first thing a good policy does is classify severity, because a phishing email and a ransomware attack on a manufacturing line don't deserve the same response speed.
+
+| Severity | Description | Response Time | Examples |
+|---|---|---|---|
+| **Critical** | Actual or imminent threat to safety, production-halting OT compromise, or large-scale breach of regulated data | 15 minutes | Ransomware on plant control systems; PHI/PII breach affecting 10,000+ records; safety-system tampering |
+| **High** | Significant disruption to business operations or confirmed unauthorized access to sensitive systems | 1 hour | Malware on corporate servers; confirmed unauthorized admin access; localized OT disruption |
+| **Medium** | Limited impact, contained to a single system or small user group | 4 hours | Phishing compromise of a single account; isolated malware on a workstation |
+| **Low** | Minimal or no operational impact; policy violations | 24 hours | Failed phishing attempt reported by a user; minor policy violation |
+
+Without this tiering, everything either gets treated as an emergency (burnout) or nothing does (disaster).
+
+## 2. Who Actually Does What
+
+An incident isn't just an IT problem. The response team spans:
+
+| Role | Responsibility |
+|---|---|
+| **Incident Response Manager** | Leads the overall response, coordinates the team, makes escalation decisions |
+| **Security Analysts** | Perform detection, triage, forensic analysis, and containment actions |
+| **IT Support** | Execute technical remediation (patching, system restoration, network isolation) |
+| **Legal Counsel** | Advises on regulatory notification obligations (e.g., GDPR), litigation risk, and evidence handling |
+| **Communications/PR** | Manages internal and external messaging, media inquiries, and customer communication |
+| **Executive Sponsor** | Provides authority for major decisions (e.g., system shutdown), approves budget for response, liaises with the board |
+
+## 3. Detection and Reporting
+
+Detection isn't just automated. Yes, SIEM alerts, OT/IoT anomaly monitoring, and endpoint detection tools catch a lot. But employee reporting matters just as much.
+
+#### How to report an incident
+- 24/7 Security Operations Center (SOC) hotline
+- A monitored security-incident email address
+- An incident intake form on the internal IT portal
+
+#### Information to collect
+- Date, time, and location of the observed event
+- Systems, accounts, or OT devices involved
+- Description of what was observed and any actions already taken
+- Name and contact information of the reporter
+
+#### Initial assessment
+The on-call Security Analyst triages within the response window for the assigned severity, then notifies the Incident Response Manager, who decides whether to formally activate the full team.
+
+## 4. Response Procedures: Containment Before Cleanup
+
+This is the part people get wrong under pressure — the instinct is to fix it immediately. But containment has to happen *before* evidence gets wiped out by well-meaning cleanup.
+
+#### Containment
+Short-term isolation of affected systems/network segments to stop the spread, followed by evidence preservation (memory images, logs, disk images captured before anything else changes), then long-term compensating controls while a permanent fix is prepared.
+
+#### Eradication
+Determine root cause through forensic analysis, remove malware and close exploited vulnerabilities, then validate the threat is fully gone before restoring anything.
+
+#### Recovery
+Restore from known-clean backups, test in an isolated environment before reconnecting to production/OT networks, and monitor closely for a minimum 30-day heightened-monitoring period on Critical/High incidents.
+
+## 5. Communication Has a Clock Attached
+
+| Stakeholder | When to Notify | Method |
+|---|---|---|
+| **Executive Management** | Immediately for Critical; within 4 hours for High | Phone call + written summary |
+| **Legal** | Immediately upon suspicion of a data breach or regulatory exposure | Direct call to Legal Counsel |
+| **Regulators** | Within 72 hours of a confirmed personal data breach (GDPR Art. 33) or per local law | Formal written notification via Legal |
+| **Affected Users/Customers** | Without undue delay once impact is confirmed and Legal has approved messaging | Email and/or public notice via Communications team |
+
+## 6. Evidence Handling
+
+#### Chain of custody
+Every piece of evidence (logs, images, physical devices) gets logged with collector name, date/time, item description, and every subsequent transfer of custody.
+
+#### Preservation
+Forensic images and logs are stored in a write-protected, access-controlled evidence repository, kept separate from working analysis copies.
+
+#### Documentation
+Every action taken during response is logged with timestamps, sufficient to reconstruct the full timeline for audit or legal proceedings.
+
+## 7. The Part That Gets Skipped: Afterward
+
+Within 10 business days of closing a Critical or High severity incident, the team sits down for a lessons-learned meeting: what happened, what worked, what didn't, what needs to change.
+
+A final incident report gets completed and retained for a minimum of 3 years — covering root cause, timeline, impact, and corrective actions with named owners and due dates.
+
+### Incident Report Template (Quick Reference)
+
+| Field | Details |
+|---|---|
+| Incident ID | |
+| Date/Time Reported | |
+| Reported By | |
+| Severity | Critical / High / Medium / Low |
+| Systems/Locations Affected | |
+| Summary of Incident | |
+| Root Cause | |
+| Containment Actions Taken | |
+| Eradication Actions Taken | |
+| Recovery Actions Taken | |
+| Regulatory Notification Required? | Yes/No — details |
+| Lessons Learned | |
+| Corrective Actions & Owners | |
+| Report Prepared By | |
+| Date Closed | |
+
+**The uncomfortable truth:** the plan you write when things are calm is the only thing standing between "controlled incident" and "total chaos" when things aren't.

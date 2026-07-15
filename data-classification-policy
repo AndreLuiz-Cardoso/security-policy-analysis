@@ -1,0 +1,77 @@
+# Not All Data Deserves the Same Lock on the Door
+
+Here's a mistake a lot of organizations make: they treat all their data the same way. Encrypt everything, restrict everything, lock everything down — which sounds secure until you realize it makes people route around the system because it's too slow to actually work with. Or worse, the opposite happens: nothing gets classified, and a spreadsheet full of patient data ends up sitting in the same unprotected folder as the company holiday party flyer.
+
+The fix isn't more security everywhere — it's *proportional* security, based on what the data actually is.
+
+The scenario: a healthcare provider handling patient medical records (PHI), employee data (PII), financial data, research data, business operations data, and public marketing content — all under HIPAA, GDPR, and state privacy law.
+
+## Four Levels, Not One Blanket Rule
+
+| Level | Description | Examples |
+|---|---|---|
+| **PUBLIC** | Approved for release; no harm if disclosed | Marketing materials, public website content |
+| **INTERNAL** | Internal use only; low risk if disclosed but not intended for the public | Internal memos, organizational charts, meeting notes |
+| **CONFIDENTIAL** | Disclosure could cause harm to individuals or the organization | Employee PII, financial data, vendor contracts |
+| **RESTRICTED** | Disclosure could cause severe harm; highest sensitivity | Protected Health Information (PHI), authentication credentials, encryption keys |
+
+## What Changes at Each Level
+
+| Requirement | Public | Internal | Confidential | Restricted |
+|---|---|---|---|---|
+| **Labeling** | No | Yes | Yes | Yes |
+| **Encryption at Rest** | No | No | Yes | Yes (AES-256 or equivalent) |
+| **Encryption in Transit** | No | Recommended | Yes (TLS 1.2+) | Yes (TLS 1.2+, mandatory) |
+| **Access Control** | None | All employees | Role-based, need-to-know | Role-based, need-to-know + MFA |
+
+This is the part that actually saves time in practice — public data moves freely, while restricted data gets the full treatment: encryption, access logging, need-to-know only.
+
+## Labeling
+
+- Documents include a classification header/footer (e.g., "CONFIDENTIAL — Internal Use") on every page for Confidential and Restricted material
+- Electronic files use classification-tagged naming conventions or metadata tags where supported
+- Public and Internal materials aren't required to be labeled, though a general internal-use footer is fine
+
+## Storage Isn't One-Size-Fits-All Either
+
+| Classification | Approved Locations | Prohibited Locations |
+|---|---|---|
+| Public / Internal | Company intranet, approved shared drives | N/A |
+| Confidential | Encrypted company file servers, approved cloud storage | Personal cloud storage, personal email, unencrypted USB drives |
+| Restricted | Encrypted EHR/EMR systems, encrypted and access-logged storage with audit trail | Any unencrypted storage, personal devices, personal cloud accounts, unattended printouts |
+
+## Transmission
+
+- Confidential and Restricted data never goes out via unencrypted email — use the secure email gateway or an encrypted file-transfer solution
+- PHI (Restricted) transmitted externally requires a signed Business Associate Agreement (BAA) with the receiving party
+- Faxing Restricted data requires a pre-verified recipient number and a confidentiality cover sheet
+- Public data can move through any standard channel without restriction
+
+## Disposal Is Where Most Breaches Actually Happen
+
+It's rarely the fancy hack that causes a data breach — it's the old hard drive that got thrown out without being wiped, or the box of paper records that went to regular recycling instead of a shredder.
+
+- Paper records containing Confidential or Restricted data: cross-cut shredded or placed in locked shredding bins for certified destruction
+- Electronic media: sanitized per NIST SP 800-88 (clear, purge, or destroy as appropriate) before reuse or disposal
+- Disposal of Restricted data (PHI) is logged — date, method, responsible party — to support HIPAA audit requirements
+
+## Access Isn't "Set It and Forget It"
+
+- Access to Confidential and Restricted data is granted strictly on a need-to-know / role-based basis, approved by the data owner
+- Access to Restricted data (PHI) requires manager approval, completion of HIPAA privacy training, and is logged in an access audit trail
+- Access reviews happen quarterly for Restricted data, semi-annually for Confidential data, with immediate revocation on role change or termination
+
+## The One-Page Version (For Everyone Who Won't Read the Full Policy)
+
+### Quick Reference Guide
+
+| Level | Ask Yourself | What To Do |
+|---|---|---|
+| **PUBLIC** | Is this already meant for anyone to see? | Share freely; no special handling needed |
+| **INTERNAL** | Is this for staff only, but not sensitive? | Keep on internal systems; don't post publicly |
+| **CONFIDENTIAL** | Could this harm a person or the company if leaked? | Encrypt, share only need-to-know, use secure channels |
+| **RESTRICTED** | Is this PHI, credentials, or something severe if exposed? | Encrypt always, MFA required, log every access, never store on personal devices |
+
+When in doubt, treat it as Confidential and ask your manager or Privacy Officer.
+
+**The real point:** classification isn't bureaucracy for its own sake. It's what lets an organization protect what actually matters without grinding everything else to a halt.
